@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using StudentManagementSystem.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("StudentDBContextConnection") ?? throw new InvalidOperationException("Connection string 'StudentDBContextConnection' not found.");
+
+builder.Services.AddDbContext<StudentDBContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<StudentUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<StudentDBContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
