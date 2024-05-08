@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StudentManagementSystem.Areas.Identity.Data;
+using StudentManagementSystem.Models;
 
 namespace StudentManagementSystem.Areas.Identity.Data;
 
@@ -21,6 +22,8 @@ public class StudentDBContext : IdentityDbContext<StudentUser>
         // Add your customizations after calling base.OnModelCreating(builder);
         builder.ApplyConfiguration(new ApplicationUserEntityCofiguration());
     }
+
+public DbSet<StudentManagementSystem.Models.Subject> Subject { get; set; } = default!;
 }
 
 public class ApplicationUserEntityCofiguration : IEntityTypeConfiguration<StudentUser>
